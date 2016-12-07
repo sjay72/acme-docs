@@ -1,3 +1,7 @@
+QPID_BOOKS_DIR := $(shell readlink -f ../qpid-books)
+ACTIVEMQ_BOOKS_DIR := $(shell readlink -f ../activemq-books)
+ASCIIDOCTOR_OPTIONS := -a QpidBooksDir="${QPID_BOOKS_DIR}" -a ActiveMqBooksDir="${ACTIVEMQ_BOOKS_DIR}"
+
 BUILD_DIR := build
 
 BOOK_SOURCES := $(shell find books -type f -name master.adoc)
@@ -36,7 +40,7 @@ clean:
 define BOOK_TEMPLATE =
 $${BUILD_DIR}/${1}/index.html: $$(shell find -L books/${1} -type f -name \*.adoc)
 	@mkdir -p $${@D}
-	asciidoctor -o $$@ books/${1}/master.adoc
+	asciidoctor ${ASCIIDOCTOR_OPTIONS} -o $$@ books/${1}/master.adoc
 
 $${BUILD_DIR}/${1}/images:
 	@mkdir -p $${@D}
@@ -47,7 +51,7 @@ $(foreach dir,${BOOK_SOURCES:books/%/master.adoc=%},$(eval $(call BOOK_TEMPLATE,
 
 ${BUILD_DIR}/%.html: books/%.adoc
 	@mkdir -p ${@D}
-	asciidoctor -o $@ $<
+	asciidoctor ${ASCIIDOCTOR_OPTIONS} -o $@ $<
 
 ${BUILD_DIR}/images/%: images/%
 	@mkdir -p ${@D}
