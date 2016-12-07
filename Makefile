@@ -1,5 +1,5 @@
-QPID_BOOKS_DIR := $(shell readlink -f ../qpid-books)
-ACTIVEMQ_BOOKS_DIR := $(shell readlink -f ../activemq-books)
+QPID_BOOKS_DIR := $(shell readlink -f upstreams/qpid-books)
+ACTIVEMQ_BOOKS_DIR := $(shell readlink -f upstreams/activemq-books)
 ASCIIDOCTOR_OPTIONS := -a QpidBooksDir="${QPID_BOOKS_DIR}" -a ActiveMqBooksDir="${ACTIVEMQ_BOOKS_DIR}"
 
 BUILD_DIR := build
