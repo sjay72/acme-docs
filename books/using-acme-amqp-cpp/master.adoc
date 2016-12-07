@@ -2,7 +2,7 @@ include::includes/attributes.adoc[]
 
 :ClientName: Acme AMQP C++
 :ClientVersion: 0.16.0
-:UpstreamDir: {QpidBooksDir}/books/using-qpid-proton-cpp
+:UpstreamBookDir: {QpidUpstreamDir}/books/using-qpid-proton-cpp
 
 = Using the {ClientName} Client
 
@@ -10,4 +10,4 @@ include::overview.adoc[leveloffset=+1]
 
 include::installation.adoc[leveloffset=+1]
 
-include::{UpstreamDir}/getting-started.adoc[leveloffset=+1]
+include::{UpstreamBookDir}/getting-started.adoc[leveloffset=+1]
