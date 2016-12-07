@@ -1,0 +1,12 @@
+include::includes/attributes.adoc[]
+
+:BrokerName: Acme Broker
+:UpstreamDir: {ActiveMqBooksDir}/books/using-activemq-artemis
+
+= Using {BrokerName}
+
+include::overview.adoc[leveloffset=+1]
+
+include::installation.adoc[leveloffset=+1]
+
+include::{UpstreamDir}/getting-started.adoc[leveloffset=+1]

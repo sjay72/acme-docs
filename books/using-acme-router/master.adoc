@@ -1,0 +1,10 @@
+include::includes/attributes.adoc[]
+
+:RouterName: Acme Router
+:RouterVersion: 0.16.0
+
+= Using {RouterName}
+
+include::overview.adoc[leveloffset=+1]
+
+include::installation.adoc[leveloffset=+1]

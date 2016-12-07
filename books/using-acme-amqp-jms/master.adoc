@@ -1,0 +1,10 @@
+include::includes/attributes.adoc[]
+
+:ClientName: Acme AMQP JMS
+:ClientVersion: 1.0.0
+
+= Using the {ClientName} Client
+
+include::overview.adoc[leveloffset=+1]
+
+include::installation.adoc[leveloffset=+1]

@@ -1,0 +1,4 @@
+:doctype: book
+
+:QpidBooksDir: {docdir}/../../../qpid-books
+:ActiveMqBooksDir: {docdir}/../../../activemq-books

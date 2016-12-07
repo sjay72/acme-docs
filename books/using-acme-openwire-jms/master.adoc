@@ -1,0 +1,10 @@
+include::includes/attributes.adoc[]
+
+:ClientName: ActiveMQ JMS
+:ClientVersion: 1.0
+
+= Using {ClientName}
+
+include::overview.adoc[leveloffset=+1]
+
+include::installation.adoc[leveloffset=+1]
