@@ -4,16 +4,16 @@ ASCIIDOCTOR_OPTIONS := -a QpidUpstreamDir="${QPID_UPSTREAM_DIR}" -a ActiveMqUpst
 
 BUILD_DIR := build
 
-BOOK_SOURCES := $(shell find books -type f -name master.adoc)
-BOOK_TARGETS := \
-	${BOOK_SOURCES:books/%/master.adoc=${BUILD_DIR}/%/index.html} \
-	${BOOK_SOURCES:books/%/master.adoc=${BUILD_DIR}/%/images}
+DOC_SOURCES := $(shell find docs -type f -name master.adoc)
+DOC_TARGETS := \
+	${DOC_SOURCES:docs/%/master.adoc=${BUILD_DIR}/%/index.html} \
+	${DOC_SOURCES:docs/%/master.adoc=${BUILD_DIR}/%/images}
 
 IMAGE_SOURCES := $(shell find images -type f)
 IMAGE_TARGETS := ${IMAGE_SOURCES:images/%=${BUILD_DIR}/images/%}
 
-EXTRA_SOURCES := books/index.adoc
-EXTRA_TARGETS := ${EXTRA_SOURCES:books/%.adoc=${BUILD_DIR}/%.html}
+EXTRA_SOURCES := docs/index.adoc
+EXTRA_TARGETS := ${EXTRA_SOURCES:docs/%.adoc=${BUILD_DIR}/%.html}
 
 .PHONY: default
 default: build
@@ -25,7 +25,7 @@ help:
 	@echo "clean          Removes ${BUILD_DIR}/ and other build artifacts"
 
 .PHONY: build
-build: ${BOOK_TARGETS} ${IMAGE_TARGETS} ${EXTRA_TARGETS}
+build: ${DOC_TARGETS} ${IMAGE_TARGETS} ${EXTRA_TARGETS}
 	@echo "See the output in your browser at file://${PWD}/${BUILD_DIR}/index.html"
 
 .PHONY: publish
@@ -37,19 +37,19 @@ publish:
 clean:
 	rm -rf ${BUILD_DIR}
 
-define BOOK_TEMPLATE =
-$${BUILD_DIR}/${1}/index.html: $$(shell find -L books/${1} -type f -name \*.adoc)
+define DOC_TEMPLATE =
+$${BUILD_DIR}/${1}/index.html: $$(shell find -L docs/${1} -type f -name \*.adoc)
 	@mkdir -p $${@D}
-	asciidoctor ${ASCIIDOCTOR_OPTIONS} -o $$@ books/${1}/master.adoc
+	asciidoctor ${ASCIIDOCTOR_OPTIONS} -o $$@ docs/${1}/master.adoc
 
 $${BUILD_DIR}/${1}/images:
 	@mkdir -p $${@D}
 	ln -s --force --no-target-directory ../images $$@
 endef
 
-$(foreach dir,${BOOK_SOURCES:books/%/master.adoc=%},$(eval $(call BOOK_TEMPLATE,${dir})))
+$(foreach dir,${DOC_SOURCES:docs/%/master.adoc=%},$(eval $(call DOC_TEMPLATE,${dir})))
 
-${BUILD_DIR}/%.html: books/%.adoc
+${BUILD_DIR}/%.html: docs/%.adoc
 	@mkdir -p ${@D}
 	asciidoctor ${ASCIIDOCTOR_OPTIONS} -o $@ $<
 
